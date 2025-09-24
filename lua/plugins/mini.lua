@@ -1,1 +1,1 @@
-return { 'echasnovski/mini.nvim', version = false, enabled = false }
+return { 'nvim-mini/mini.nvim', version = false, enabled = false }
