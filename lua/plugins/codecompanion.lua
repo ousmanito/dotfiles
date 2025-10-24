@@ -22,7 +22,7 @@ return {
         slash_commands = {
           buffer = {
             opts = {
-              provider = 'telescope', -- default|telescope|mini_pick|fzf_lua
+              provider = 'fzf_lua', -- default|telescope|mini_pick|fzf_lua
             },
           },
         },
@@ -84,7 +84,7 @@ return {
 
     display = {
       action_palette = {
-        provider = 'telescope', -- default|telescope|mini_pick
+        provider = 'fzf_lua', -- default|telescope|mini_pick
       },
       chat = {
         intro_message = '✨',

@@ -36,29 +36,62 @@ vim.keymap.set('n', '[h', ':resize -3<CR>')
 vim.keymap.set('n', ']H', ':resize +7<CR>')
 vim.keymap.set('n', '[H', ':resize -7<CR>')
 
--- telescope.nvim
-vim.keymap.set('n', '<leader>sb', require('telescope.builtin').buffers, { desc = '[S]earch [B]uffers' })
-vim.keymap.set('n', '<leader>sm', require('telescope.builtin').marks, { desc = '[S]earch [M]arks' })
-vim.keymap.set('n', '<leader>sr', require('telescope.builtin').registers, { desc = '[S]earch [R]egisters' })
+-- Native LSP
+vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = '[R]e[n]ame' })
+vim.keymap.set('n', ']g', vim.diagnostic.goto_next, { desc = '[G]oto Next Diagnostic' })
+vim.keymap.set('n', '[g', vim.diagnostic.goto_prev, { desc = '[G]oto Previous Diagnostic' })
+vim.keymap.set('n', '<leader>ga', vim.lsp.buf.code_action, { desc = '[G]oto Code [A]ction' })
+vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = '[G]oto [D]eclaration' })
 
-vim.keymap.set('n', '<leader>sk', require('telescope.builtin').keymaps, { desc = '[S]earch [K]eymaps' })
+-- fzf.lua
+-- Buffer and files
+vim.keymap.set('n', '<leader>sb', ':FzfLua buffers<CR>', { desc = '[S]earch [B]uffers' })
+vim.keymap.set('n', '<leader>qf', ':FzfLua quickfix<CR>', { desc = '[Q]uick [F]ix List' })
+vim.keymap.set('n', '<leader>bs', ':FzfLua treesitter<CR>', { desc = '[B]uffer [S]ymbols' })
+vim.keymap.set('n', '<leader>of', ':FzfLua oldfiles<CR>', { desc = '[O]pened [F]iles History' })
+vim.keymap.set('n', '<leader>.', ':FzfLua files<CR>', { desc = 'Search Files (cwd)' })
+vim.keymap.set('n', '<leader>>', ':FzfLua files cwd=/<CR>', { desc = 'Search Files' })
 
-vim.keymap.set('n', '<leader>sd', require('telescope.builtin').help_tags, { desc = '[S]earch [D]ocs' })
-vim.keymap.set('n', '<leader>sM', require('telescope.builtin').man_pages, { desc = '[M]an [P]ages' })
+-- Search
+vim.keymap.set('n', '<leader>/', ':FzfLua live_grep_native<CR>', { desc = 'Live Grep (fuzzy)' })
 
-vim.keymap.set('n', '<leader>qf', require('telescope.builtin').quickfix, { desc = '[Q]uick [F]ix List' })
-vim.keymap.set('n', '<leader>se', require('telescope.builtin').diagnostics, { desc = '[S]earch [E]rrors' })
+-- Git
+vim.keymap.set('n', '<leader>xs', ':FzfLua git_status<CR>', { desc = '[G]it [S]tatus' })
+vim.keymap.set('n', '<leader>xf', ':FzfLua git_files<CR>', { desc = '[G]it [F]iles' })
+vim.keymap.set('n', '<leader>xd', ':FzfLua git_diff<CR>', { desc = '[G]it [D]iff' })
+vim.keymap.set('n', '<leader>xc', ':FzfLua git_commits<CR>', { desc = '[G]it [C]ommits' })
+vim.keymap.set('n', '<leader>xbc', ':FzfLua git_bcommits<CR>', { desc = '[G]it [B]uffer [C]ommits' })
+vim.keymap.set('n', '<leader>xb', ':FzfLua git_branches<CR>', { desc = '[G]it [B]ranches' })
+vim.keymap.set('n', '<leader>xt', ':FzfLua git_tags<CR>', { desc = '[G]it [T]ags' })
+vim.keymap.set('n', '<leader>xS', ':FzfLua git_stash<CR>', { desc = '[G]it [S]tash' })
 
-vim.keymap.set('n', '<leader>of', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-vim.keymap.set('n', '<leader>.', function()
-  require('telescope.builtin').find_files { cwd = require('telescope.utils').buffer_dir() }
-end, { desc = 'Find Files (buffer dir)' })
-vim.keymap.set('n', '<leader>>', require('telescope.builtin').find_files, { desc = 'Search Files (cwd)' })
-vim.keymap.set('n', '<leader>/', require('telescope.builtin').live_grep, { desc = 'Fuzzy Search' })
+-- LSP/Diagnostics
+vim.keymap.set('n', '<leader>sE', ':FzfLua diagnostics_document<CR>', { desc = '[S]earch Document [E]rrors' })
+vim.keymap.set('n', '<leader>se', ':FzfLua diagnostics_workspace<CR>', { desc = '[S]earch Workspace [E]rrors' })
+vim.keymap.set('n', '<leader>gr', ':FzfLua lsp_references<CR>', { desc = '[G]o to [R]eferences' })
+vim.keymap.set('n', '<leader>gd', ':FzfLua lsp_definitions<CR>', { desc = '[G]o to [D]efinitions' })
+vim.keymap.set('n', '<leader>gD', ':FzfLua lsp_declarations<CR>', { desc = '[G]o to [D]eclarations' })
+vim.keymap.set('n', '<leader>gt', ':FzfLua lsp_typedefs<CR>', { desc = '[G]o to [T]ypedefs' })
+vim.keymap.set('n', '<leader>gi', ':FzfLua lsp_implementations<CR>', { desc = '[G]o to [I]mplementations' })
+vim.keymap.set('n', '<leader>ds', ':FzfLua lsp_document_symbols<CR>', { desc = '[D]ocument [S]ymbols' })
+vim.keymap.set('n', '<leader>wS', ':FzfLua lsp_workspace_symbols<CR>', { desc = '[W]orkspace [S]ymbols' })
+vim.keymap.set('n', '<leader>ws', ':FzfLua lsp_live_workspace_symbols<CR>', { desc = 'Live [W]orkspace [S]ymbols' })
+vim.keymap.set('n', '<leader>ic', ':FzfLua lsp_incoming_calls<CR>', { desc = 'LSP [I]ncoming [C]alls' })
+vim.keymap.set('n', '<leader>oc', ':FzfLua lsp_outgoing_calls<CR>', { desc = 'LSP [O]utgoing [C]alls' })
+vim.keymap.set('n', '<leader>ga', ':FzfLua lsp_code_actions<CR>', { desc = 'LSP [G]o to Code [A]ctions' })
+vim.keymap.set('n', '<leader>lf', ':FzfLua lsp_finder<CR>', { desc = '[L]SP [F]inder' })
 
-vim.keymap.set('n', '<leader>gs', require('telescope.builtin').git_status, { desc = '[G]it [S]tatus' })
-
-vim.keymap.set('n', '<leader>cs', require('telescope.builtin').colorscheme, { desc = '[C]olor [S]cheme' })
+-- Misc
+vim.keymap.set('n', '<leader>fb', ':FzfLua builtin<CR>', { desc = '[F]zf-lua [B]uiltins' })
+vim.keymap.set('n', '<leader>sd', ':FzfLua helptags<CR>', { desc = '[S]earch [D]ocs' })
+vim.keymap.set('n', '<leader>sM', ':FzfLua manpages<CR>', { desc = '[M]an [P]ages' })
+vim.keymap.set('n', '<leader>cs', ':FzfLua colorschemes<CR>', { desc = '[C]olor [S]chemes' })
+vim.keymap.set('n', '<leader>cS', ':FzfLua awesome_colorschmes<CR>', { desc = '[A]wesome [C]olor [S]chemes' })
+vim.keymap.set('n', '<leader>nc', ':FzfLua commands<CR>', { desc = '[N]vim [C]ommands' })
+vim.keymap.set('n', '<leader>sm', ':FzfLua marks<CR>', { desc = '[S]earch [M]arks' })
+vim.keymap.set('n', '<leader>sr', ':FzfLua registers<CR>', { desc = '[S]earch [R]egisters' })
+vim.keymap.set('n', '<leader>no', ':FzfLua nvim_options<CR>', { desc = '[N]vim [O]ptions' })
+vim.keymap.set('n', '<leader>sk', ':FzfLua keymaps<CR>', { desc = '[S]earch [K]eymaps' })
 
 -- luasnip
 
@@ -88,8 +121,3 @@ vim.cmd [[cab cc CodeCompanion]]
 
 -- nvim-surround
 vim.keymap.set('v', 'S', '<Plug>(nvim-surround-visual)')
-
--- ts-tools
-vim.keymap.set('n', '<leader>mi', '<cmd>TSToolsAddMissingImports<cr>', { desc = 'Add Missing Imports' })
-vim.keymap.set('n', '<leader>oi', ':TSToolsOrganizeImports<cr>', { desc = 'Organize Imports' })
-vim.keymap.set('n', '<leader>si', ':TSToolsSortImports<cr>', { desc = 'Sort Imports' })
