@@ -54,6 +54,22 @@ vim.keymap.set('n', '<leader>>', ':FzfLua files cwd=/<CR>', { desc = 'Search Fil
 
 -- Search
 vim.keymap.set('n', '<leader>/', ':FzfLua live_grep_native<CR>', { desc = 'Live Grep (fuzzy)' })
+vim.keymap.set('n', '<leader>?', function()
+  vim.ui.input({
+    prompt = 'Enter a directory: ',
+    completion = 'dir',
+  }, function(input)
+    if input then
+      local dir = vim.fs.normalize(input)
+      local stat = vim.uv.fs_stat(dir)
+      if stat and stat.type == 'directory' then
+        require('fzf-lua').live_grep_native { cwd = dir }
+      else
+        print 'Invalid directory.'
+      end
+    end
+  end)
+end, { desc = 'Dynamic Live Grep (fuzzy)' })
 
 -- Git
 vim.keymap.set('n', '<leader>xs', ':FzfLua git_status<CR>', { desc = '[G]it [S]tatus' })
@@ -68,17 +84,21 @@ vim.keymap.set('n', '<leader>xS', ':FzfLua git_stash<CR>', { desc = '[G]it [S]ta
 -- LSP/Diagnostics
 vim.keymap.set('n', '<leader>sE', ':FzfLua diagnostics_document<CR>', { desc = '[S]earch Document [E]rrors' })
 vim.keymap.set('n', '<leader>se', ':FzfLua diagnostics_workspace<CR>', { desc = '[S]earch Workspace [E]rrors' })
-vim.keymap.set('n', '<leader>gr', ':FzfLua lsp_references<CR>', { desc = '[G]o to [R]eferences' })
-vim.keymap.set('n', '<leader>gd', ':FzfLua lsp_definitions<CR>', { desc = '[G]o to [D]efinitions' })
-vim.keymap.set('n', '<leader>gD', ':FzfLua lsp_declarations<CR>', { desc = '[G]o to [D]eclarations' })
-vim.keymap.set('n', '<leader>gt', ':FzfLua lsp_typedefs<CR>', { desc = '[G]o to [T]ypedefs' })
-vim.keymap.set('n', '<leader>gi', ':FzfLua lsp_implementations<CR>', { desc = '[G]o to [I]mplementations' })
+vim.keymap.set('n', 'gr', ':FzfLua lsp_references<CR>', { desc = '[G]o to [R]eferences' })
+vim.keymap.set('n', 'gd', ':FzfLua lsp_definitions<CR>', { desc = '[G]o to [D]efinitions' })
+vim.keymap.set('n', 'gD', ':FzfLua lsp_declarations<CR>', { desc = '[G]o to [D]eclarations' })
+vim.keymap.set('n', 'gi', ':FzfLua lsp_implementations<CR>', { desc = '[G]o to [I]mplementations' })
 vim.keymap.set('n', '<leader>ds', ':FzfLua lsp_document_symbols<CR>', { desc = '[D]ocument [S]ymbols' })
 vim.keymap.set('n', '<leader>wS', ':FzfLua lsp_workspace_symbols<CR>', { desc = '[W]orkspace [S]ymbols' })
 vim.keymap.set('n', '<leader>ws', ':FzfLua lsp_live_workspace_symbols<CR>', { desc = 'Live [W]orkspace [S]ymbols' })
 vim.keymap.set('n', '<leader>ic', ':FzfLua lsp_incoming_calls<CR>', { desc = 'LSP [I]ncoming [C]alls' })
 vim.keymap.set('n', '<leader>oc', ':FzfLua lsp_outgoing_calls<CR>', { desc = 'LSP [O]utgoing [C]alls' })
-vim.keymap.set('n', '<leader>ga', ':FzfLua lsp_code_actions<CR>', { desc = 'LSP [G]o to Code [A]ctions' })
+vim.keymap.set(
+  { 'n', 'v' },
+  'ga',
+  ':lua vim.lsp.buf.code_action({ context = { only = { "source", "refactor", "quickfix" } } })<CR>',
+  { desc = 'LSP [G]o to Code [A]ctions' }
+)
 vim.keymap.set('n', '<leader>lf', ':FzfLua lsp_finder<CR>', { desc = '[L]SP [F]inder' })
 
 -- Misc
@@ -94,7 +114,6 @@ vim.keymap.set('n', '<leader>no', ':FzfLua nvim_options<CR>', { desc = '[N]vim [
 vim.keymap.set('n', '<leader>sk', ':FzfLua keymaps<CR>', { desc = '[S]earch [K]eymaps' })
 
 -- luasnip
-
 local ls = require 'luasnip'
 
 vim.keymap.set({ 'i', 's' }, '<C-L>', function()
@@ -111,9 +130,9 @@ vim.keymap.set({ 'i', 's' }, '<C-E>', function()
 end, { silent = true })
 
 -- codecompanion
-vim.keymap.set({ 'n', 'v' }, '<LocalLeader>ca', '<cmd>CodeCompanionActions<cr>', { noremap = true, silent = true })
+vim.keymap.set({ 'n', 'v' }, '<LocalLeader>cc', '<cmd>CodeCompanionActions<cr>', { noremap = true, silent = true })
 vim.keymap.set({ 'n', 'v' }, '<LocalLeader>ct', '<cmd>CodeCompanionChat Toggle<cr>', { noremap = true, silent = true })
-vim.keymap.set('v', 'ga', '<cmd>CodeCompanionChat Add<cr>', { noremap = true, silent = true })
+vim.keymap.set('v', 'cca', '<cmd>CodeCompanionChat Add<cr>', { noremap = true, silent = true })
 vim.keymap.set('v', '<leader>dt', function()
   require('codecompanion').prompt 'recette'
 end, { desc = '[D]escribe [T]ests' })

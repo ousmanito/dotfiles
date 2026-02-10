@@ -7,14 +7,13 @@ return {
     {
       '<leader>F',
       function()
-        require('conform').format { async = true, lsp_format = 'fallback' }
+        require('conform').format { async = true, timeout_ms = 500, lsp_format = 'fallback' }
       end,
       mode = '',
       desc = '[F]ormat buffer',
     },
   },
   opts = {
-    notify_on_error = false,
     formatters_by_ft = {
       lua = { 'stylua' },
       python = {
@@ -22,14 +21,14 @@ return {
         'ruff_format',
         'ruff_organize_imports',
       },
-      javascript = { 'prettierd', stop_after_first = true },
-      typescript = { 'prettierd', stop_after_first = true },
-      typescriptreact = { 'prettierd', stop_after_first = true },
-      javascriptreact = { 'prettierd', stop_after_first = true },
-      json = { 'prettierd', stop_after_first = true },
-      html = { 'prettierd', stop_after_first = true },
-      css = { 'prettierd', stop_after_first = true },
-      scss = { 'prettierd', stop_after_first = true },
+      javascript = { 'prettier', stop_after_first = true },
+      typescript = { 'prettier', stop_after_first = true },
+      typescriptreact = { 'prettier', stop_after_first = true },
+      javascriptreact = { 'prettier', stop_after_first = true },
+      json = { 'prettier', stop_after_first = true },
+      html = { 'prettier', stop_after_first = true },
+      css = { 'prettier', stop_after_first = true },
+      scss = { 'prettier', stop_after_first = true },
     },
   },
 }
