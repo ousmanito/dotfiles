@@ -1,0 +1,34 @@
+name:
+root: ~/dev/
+tmux_options: -f ~/.tmux.conf
+tmux_detached: false
+on_project_first_start: docker compose up --help
+on_project_exit: docker compose stop --help
+startup_window: logs
+
+windows:
+  - ide:
+      panes:
+        - nvim
+  - logs:
+      layout: tiled
+      panes:
+        - man git
+        - man find
+        - man openssl
+        - man apt-get
+  - git:
+      layout: even-horizontal
+      panes:
+        - ls
+        - pane_with_multiples_commands:
+            - man git; pwd
+        - pane_with_multiples_commands:
+            - ls
+            - ls -la
+  - shells:
+      layout: tiled
+      panes:
+        - pwd
+        - ls
+        - whoami

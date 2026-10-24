@@ -1,0 +1,45 @@
+name: cs_dare
+root: ~/dev/cs_dare_main/
+tmux_options: -f ~/.tmux.conf
+tmux_detached: false
+on_project_first_start: docker compose up -d nifi nifi-registry
+on_project_exit: docker compose stop nifi nifi-registry
+startup_window: logs
+
+windows:
+  - ide:
+      panes:
+        - pane_with_multiples_commands:
+            - cd data_pseudonymisation
+            - pv
+            - cd ..
+            - nv .
+  - logs:
+      layout: even-horizontal
+      panes:
+        - dcu nifi
+        - dcu nifi-registry
+  - databases:
+      layout: 240x27,0,0{119x27,0,0,3,120x27,120,0,11},240x28,0,28{119x28,0,28,9,120x28,120,28,10}
+      panes:
+        - dcu cs-dare-psql
+        - dcu pseudo-mapping-psql
+        - dcu pseudo-mapping-2-psql
+        - dcu main-psql
+        - dcu study-psql
+  - git:
+      layout: even-horizontal
+      panes:
+        - pane_with_multiples_commands:
+            - gs
+        - pane_with_multiples_commands:
+            - glo
+  - shell:
+      panes:
+        - 
+  - shells:
+      layout: tiled
+      panes:
+        - pwd
+        - ls
+        - whoami

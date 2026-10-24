@@ -1,0 +1,50 @@
+name: adep2t
+root: ~/dev/adep2t
+tmux_options: -f ~/.tmux.conf
+tmux_detached: false
+on_project_first_start: docker compose up -d
+on_project_exit: docker compose stop
+startup_window: git2
+
+windows:
+  - ide:
+      panes:
+        - pane_with_multiples_commands:
+            - source ./django/.venv/bin/activate
+            - nv .
+  - codex:
+      panes:
+        - codex resume
+  - claude:
+      panes:
+        - claude -c
+  - django:
+      layout: even-horizontal
+      panes:
+        - dcu django
+        - dcu celery celery-flower
+  - nextjs:
+      panes:
+        - dcu nextjs
+  - databases:
+      panes:
+        - dcu postgres
+        - dcu rustfs
+        - dcu redis
+  - nginx:
+      panes:
+        - dcu nginx
+  - arx:
+      panes:
+        - dcu arx
+  - git2:
+      layout: even-horizontal
+      panes:
+        - gs
+        - glo
+  - git1:
+      panes:
+        - cd django
+  - shell:
+    panes:
+      - 

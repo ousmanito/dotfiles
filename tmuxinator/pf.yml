@@ -1,0 +1,36 @@
+name: pf
+root: ~/dev/portfolio
+tmux_options: -f ~/.tmux.conf
+tmux_detached: false
+on_project_first_start: make docker-dev-up
+on_project_exit: make docker-dev-down
+startup_window: ide
+
+windows:
+  - ide:
+      layout: main-vertical
+      panes:
+        - pane_with_multiples_commands:
+            - cd apps/backend/
+            - pv
+            - cd ../..
+            - nv .
+  - ai:
+      layout: main-vertical
+      panes:
+        - claude -c
+  - logs:
+      layout: 240x27,0,0{120x27,0,0,2,119x27,121,0,13},240x28,0,28{120x28,0,28,7,119x28,121,28,12}
+      panes:
+        - docker compose logs backend -f
+        - docker compose logs frontend -f
+        - docker compose logs postgres -f
+  - git:
+      layout: even-horizontal
+      panes:
+        - gs
+        - glo
+  - shell:
+      panes:
+        - ""
+
