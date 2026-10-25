@@ -22,7 +22,7 @@ if [[ "$CURRENT" != "light" ]]; then
 
   swaymsg 'client.focused #89b4fa #89b4fa #11111b #89b4fa #89b4fa'
   swaymsg 'client.unfocused #313244 #313244 #cdd6f4 #313245 #313244'
-  althemer switch rose_pine_dawn
+  althemer switch rose-pine-dawn
 else
   echo "dark" >"$STATE_FILE"
   echo "dark" >~/.cache/current-theme
