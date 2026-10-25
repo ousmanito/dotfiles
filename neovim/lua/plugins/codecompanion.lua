@@ -62,7 +62,7 @@ return {
     prompt_library = {
       markdown = {
         dirs = {
-          '~/dev/.prompts',
+          '~/dev/prompts',
         },
       },
     },
