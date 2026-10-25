@@ -1,0 +1,94 @@
+{
+  "layer": "top",
+  "position": "top",
+  "modules-left": ["sway/workspaces"],
+  "modules-center": ["clock"],
+  "modules-right": [
+    "cpu",
+    "memory",
+    "network",
+    "sway/language",
+    "pulseaudio",
+    "backlight",
+    "power-profiles-daemon",
+    "battery",
+    "bluetooth",
+    "tray"
+  ],
+  "sway/window": {
+    "format": "{}",
+    "max-length": 50,
+    "rewrite": {
+      "^nv$": "Neovim",
+      "^nv (.*)$": "Neovim · $1",
+      "^tx s (.*)$": "Tmuxinator · $1",
+      "bash": "Bash",
+      "^obathily@[^:]+:(.+)$": "Shell : $1"
+    }
+  },
+  "sway/language": {
+    "format": "{}",
+    "on-click": "swaymsg input type:keyboard xkb_switch_layout next",
+    "tooltip": false
+  },
+  "cpu": {
+    "format": "{usage}%, {load}, {avg_frequency} GHz",
+    "interval": 2
+  },
+  "memory": {
+    "format": "{used:0.1f}G/{total:0.0f}G",
+    "interval": 2,
+    "tooltip": false
+  },
+  "network": {
+    "format-wifi": "  {essid}",
+    "format-ethernet": "󰈀  Filaire",
+    "format-disconnected": "󰖪  Offline",
+    "tooltip": false,
+    "on-click": "~/.config/sway/scripts/toggle-network-editor.sh"
+  },
+  "pulseaudio": {
+    "format": "  {volume}%",
+    "format-muted": "",
+    "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+",
+    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
+    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-click": "swaymsg '[app_id=\"org.pulseaudio.pavucontrol\"] scratchpad show'"
+  },
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "format-icons": {
+      "performance": "󰓅",
+      "balanced": "󰾅",
+      "power-saver": "󰌪"
+    }
+  },
+  "battery": {
+    "format": "{capacity}%",
+    "states": {
+      "warning": 30,
+      "critical": 15
+    }
+  },
+  "bluetooth": {
+    "format": "󰂯",
+    "format-on": "󰂯",
+    "format-off": "󰂲",
+    "format-disabled": "󰂲",
+    "format-connected": "󰂱  {num_connections}",
+    "tooltip": false,
+    "on-click": "~/.config/sway/scripts/toggle-bluetooth-manager.sh"
+  },
+  "backlight": {
+    "format": "   {percent}%",
+    "tooltip": false,
+    "on-scroll-up": "brightnessctl set +5%",
+    "on-scroll-down": "brightnessctl set 5%-"
+  },
+  "clock": {
+    "format": "{:%H:%M}"
+  },
+  "tray": {
+    "icon-size": 16
+  }
+}

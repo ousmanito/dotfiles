@@ -1,0 +1,243 @@
+/* =========================================================
+   Waybar — Light Theme 
+   ========================================================= */
+
+* {
+  font-family: "Inter", "Roboto", "Helvetica Neue", FontAwesome, sans-serif;
+  /* Supprime le relief/emboss hérité du thème GTK clair (Adwaita) */
+  text-shadow: none;
+  -gtk-icon-shadow: none;
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+}
+
+/* ---------- La barre : totalement transparente ---------- */
+window#waybar {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: rgba(28, 28, 30, 0.9);
+  /* Base héritée par les modules, surchargeable par module/bouton */
+  font-size: 13px;
+  font-weight: 500;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+tooltip {
+  background: rgba(248, 250, 252, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+}
+
+tooltip label {
+  color: rgba(28, 28, 30, 0.9);
+  font-size: 13px;
+  padding: 2px;
+}
+
+/* ---------- Les îlots flottants (groupes) ---------- */
+.modules-left {
+  margin: 6px 8px;
+  padding: 0 4px;
+  color: whitesmoke;
+}
+
+.modules-right {
+  background: rgba(244, 242, 246, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 14px;
+  margin: 6px 9px;
+  padding: 3px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+}
+
+/* Le titre central reste un texte flottant, sans pilule */
+.modules-center {
+  background: transparent;
+  margin: 6px 8px;
+}
+
+/* ---------- Modules : transparents, texte qui flotte ---------- */
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#bluetooth,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#power-profiles-daemon,
+#mpd,
+#language,
+#keyboard-state {
+  background: transparent;
+  color: rgba(28, 28, 30, 0.9);
+  padding: 0 9px;
+}
+
+#clock {
+  color: whitesmoke;
+  font-weight: 300;
+  font-size: 15px;
+}
+
+/* ---------- Boutons / workspaces ---------- */
+button {
+  border: none;
+  border-radius: 8px;
+  box-shadow: none;
+  color: inherit;
+}
+
+button:hover {
+  background: rgba(0, 0, 0, 0.06);
+  box-shadow: none;
+}
+
+#workspaces {
+  padding: 3px 2px;
+}
+
+#workspaces button {
+  padding: 0 9px;
+  margin: 0 2px;
+  border-radius: 8px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 400;
+}
+
+#workspaces button:hover {
+  background: rgba(0, 0, 0, 0.06);
+  color: rgba(255, 255, 255, 0.92);
+}
+
+#workspaces button.focused,
+#workspaces button.active {
+  color: #ffffff;
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.24);
+}
+
+#workspaces button.urgent {
+  background: rgba(32, 86, 250, 0.85);
+  color: #ffffff;
+}
+
+#mode {
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+}
+
+/* ---------- Accents d'état (couleur du texte, pas de bloc) ---------- */
+#battery {
+  color: rgba(28, 28, 30, 0.9);
+  font-weight: 500;
+}
+
+#battery.charging,
+#battery.plugged {
+  color: #248a3d; /* vert macOS clair */
+}
+
+#battery.warning:not(.charging) {
+  color: #b25000; /* orange macOS clair */
+}
+
+@keyframes blink {
+  to {
+    color: #d70015;
+  }
+}
+
+#battery.critical:not(.charging) {
+  color: #d70015; /* rouge macOS clair */
+  animation-name: blink;
+  animation-duration: 0.9s;
+  animation-timing-function: steps(12);
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#network.disconnected {
+  color: #d70015;
+}
+
+#pulseaudio.muted,
+#wireplumber.muted {
+  color: rgba(28, 28, 30, 0.4);
+}
+
+#pulseaudio:hover {
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+}
+
+#temperature.critical {
+  color: #d70015;
+}
+
+#power-profiles-daemon.performance {
+  color: #d70015;
+}
+#power-profiles-daemon.balanced {
+  color: #0071e3;
+}
+#power-profiles-daemon.power-saver {
+  color: #248a3d;
+}
+
+#idle_inhibitor.activated {
+  color: #0071e3;
+}
+
+/* ---------- Divers ---------- */
+#language {
+  color: rgba(28, 28, 30, 0.65);
+  font-weight: 600;
+  min-width: 16px;
+}
+
+#tray {
+  padding: 0 6px;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+}
+
+#tray image {
+  margin: 0 3px;
+}
+
+#scratchpad.empty {
+  background: transparent;
+}
+
+#privacy-item {
+  padding: 0 6px;
+  color: rgba(28, 28, 30, 0.9);
+}
+#privacy-item.screenshare {
+  color: #c93400;
+}
+#privacy-item.audio-in {
+  color: #248a3d;
+}
+#privacy-item.audio-out {
+  color: #0071e3;
+}
