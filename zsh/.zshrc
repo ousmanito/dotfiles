@@ -130,6 +130,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 # Basic
 
 alias c="clear"
+alias ll="ls -la"
 alias shn="shutdown -h now"
 alias pp="xclip -sel clip"
 nv() {
