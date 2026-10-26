@@ -249,18 +249,20 @@ bindsym $mod+Shift+t exec ~/.config/sway/scripts/theme-toggle.sh
 # Window style
 font pango:UbuntuSansNerdFont 10
 
-default_border pixel 2
-default_floating_border pixel 2
+default_border pixel 0
+default_floating_border pixel 0
 
 title_align center
-titlebar_padding 20 10
-gaps inner 5
-gaps outer 10
+titlebar_padding 10 5
+gaps inner 0
+gaps outer 0
 
-client.focused          #c3c4c7 #f0f0f0 #3b3c40 #a934e3 #3489e3
-client.unfocused        #ffffff #f7f8ff #9ea1a8 #a934e3 #712ff5
-client.focused_inactive #c3c4c7 #f0f0f0 #3b3c40 #a934e3 #001cbf
-client.urgent           #dc2626 #2056fa #ffffff #dc2626 #2056fa
+# client.<class>         <border>  <bg>      <texte>   <ind.>    <child_border>
+client.focused          #1926d4   #1e1e24   #ffffff   #1926d4   #3489e3
+client.unfocused        #3b3c40   #121214   #9ea1a8   #1926d4   #712ff5
+client.focused_inactive #3b3c40   #1a1a1c   #b3b3b3   #1926d4   #001cbf
+client.urgent           #dc2626   #550000   #ffffff   #dc2626   #2056fa
+
 
 # Sound
 bindsym XF86AudioLowerVolume exec wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%-

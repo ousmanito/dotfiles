@@ -1,5 +1,5 @@
 [general]
-import = ["/home/obathily/.config/alacritty/themes/rose-pine-dawn.toml"]
+import = ["/home/obathily/.config/alacritty/themes/night_owl.toml"]
 
 [env]
 TERM = "xterm-256color"
@@ -28,6 +28,7 @@ action = "ToggleFullscreen"
 key = "F11"
 
 [window]
+padding = { x = 0, y = 0 }
 dynamic_padding = true
-opacity = 0.81
+opacity = 0.77
 startup_mode = "Fullscreen"

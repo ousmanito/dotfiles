@@ -14,7 +14,8 @@
 
 /* ---------- La barre : totalement transparente ---------- */
 window#waybar {
-  background-color: rgba(255, 255, 255, 0.1);
+  /* background-color: rgba(255, 255, 255, 0.1); */
+  background-color: rgb(5, 5, 7);
   color: rgba(255, 255, 255, 0.92);
   /* Base héritée par les modules, surchargeable par module/bouton */
   font-size: 13px;
@@ -45,7 +46,7 @@ tooltip label {
 }
 
 .modules-right {
-  background: rgba(30, 30, 46, 0.55);
+  background-color: rgb(27, 27, 29);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 14px;
   margin: 6px 8px;
@@ -86,7 +87,7 @@ tooltip label {
 }
 
 #clock {
-  color: rgba(255, 255, 255, 0.6);
+  color: white;
   font-weight: 400;
   font-size: 14px;
 }
@@ -125,7 +126,7 @@ button:hover {
 #workspaces button.active {
   color: #ffffff;
   font-weight: 500;
-  background: rgba(0, 0, 0, 0.24);
+  background: rgba(39, 39, 46, 1);
 }
 
 #workspaces button.urgent {
@@ -160,7 +161,7 @@ button:hover {
 }
 
 #battery.critical:not(.charging) {
-  color: #ff453a; /* rouge macOS */
+  color: #ff453a;
   animation-name: blink;
   animation-duration: 0.9s;
   animation-timing-function: steps(12);

@@ -21,7 +21,7 @@
     "rewrite": {
       "^nv$": "Neovim",
       "^nv (.*)$": "Neovim · $1",
-      "^tx s (.*)$": "Tmuxinator · $1",
+      "^tx s (.*)$": "$1",
       "bash": "Bash",
       "^obathily@[^:]+:(.+)$": "Shell : $1"
     }
@@ -86,7 +86,9 @@
     "on-scroll-down": "brightnessctl set 5%-"
   },
   "clock": {
-    "format": "{:%H:%M}"
+    "format": "{:%H:%M}",
+    "tooltip-format": "<big>{:L%d %B %Y}</big>",
+    "locale": "fr_FR.UTF-8"
   },
   "tray": {
     "icon-size": 16
