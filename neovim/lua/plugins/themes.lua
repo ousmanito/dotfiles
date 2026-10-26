@@ -22,4 +22,7 @@ return {
     priority = 1000,
     name = 'tokyonight',
   },
+  {
+    { 'catppuccin/nvim', enabled = false, name = 'catppuccin' },
+  },
 }

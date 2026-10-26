@@ -106,7 +106,6 @@ vim.keymap.set('n', '<leader>fb', ':FzfLua builtin<CR>', { desc = '[F]zf-lua [B]
 vim.keymap.set('n', '<leader>sd', ':FzfLua helptags<CR>', { desc = '[S]earch [D]ocs' })
 vim.keymap.set('n', '<leader>sM', ':FzfLua manpages<CR>', { desc = '[M]an [P]ages' })
 vim.keymap.set('n', '<leader>cs', ':FzfLua colorschemes<CR>', { desc = '[C]olor [S]chemes' })
-vim.keymap.set('n', '<leader>cS', ':FzfLua awesome_colorschmes<CR>', { desc = '[A]wesome [C]olor [S]chemes' })
 vim.keymap.set('n', '<leader>nc', ':FzfLua commands<CR>', { desc = '[N]vim [C]ommands' })
 vim.keymap.set('n', '<leader>sm', ':FzfLua marks<CR>', { desc = '[S]earch [M]arks' })
 vim.keymap.set('n', '<leader>sr', ':FzfLua registers<CR>', { desc = '[S]earch [R]egisters' })
@@ -140,3 +139,16 @@ vim.cmd [[cab cc CodeCompanion]]
 
 -- nvim-surround
 vim.keymap.set('v', 'S', '<Plug>(nvim-surround-visual)')
+
+-- Colorscheme
+vim.keymap.set('n', '<leader>at', function()
+  local file = io.open(vim.fn.expand '~/.cache/nvim-theme', 'r')
+  if file then
+    local theme = file:read '*l'
+    file:close()
+    if theme and theme ~= '' then
+      vim.cmd('colorscheme ' .. theme)
+      print('Thème synchronisé : ' .. theme)
+    end
+  end
+end, { desc = 'Synchronize theme with system' })

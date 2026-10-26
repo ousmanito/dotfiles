@@ -16,6 +16,7 @@ fi
 if [[ "$CURRENT" != "light" ]]; then
   echo "light" >"$STATE_FILE"
   echo "light" >~/.cache/current-theme
+  echo "kanagawa-lotus" >~/.cache/nvim-theme
   gsettings set org.gnome.desktop.interface color-scheme 'prefer-light' || true
   gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita' || true
   gsettings set org.gnome.desktop.interface icon-theme 'Yaru' || true
@@ -26,6 +27,7 @@ if [[ "$CURRENT" != "light" ]]; then
 else
   echo "dark" >"$STATE_FILE"
   echo "dark" >~/.cache/current-theme
+  echo "kanagawa" >~/.cache/nvim-theme
   gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' || true
   gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark' || true
   gsettings set org.gnome.desktop.interface icon-theme 'Yaru-dark' || true

@@ -91,3 +91,19 @@ vim.o.confirm = true
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
+
+-- Colorscheme
+local function get_system_theme()
+  local file = io.open(vim.fn.expand '~/.cache/nvim-theme', 'r')
+  if file then
+    local theme = file:read '*l'
+    file:close()
+    if theme and theme ~= '' then
+      return theme
+    end
+  end
+  return 'tokyonight' -- Thème de secours par défaut si le fichier n'existe pas
+end
+
+-- Assigne le thème au démarrage
+vim.g.colorscheme = get_system_theme()
