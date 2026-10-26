@@ -67,4 +67,4 @@
 
 # Extras
 
-@/home/obathily/.codex/RTK.md
+@RTK.md
