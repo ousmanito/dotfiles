@@ -56,6 +56,10 @@ link_path \
   "$DOTFILES_DIR/waybar" \
   "$HOME/.config/waybar"
 
+link_path \
+  "$DOTFILES_DIR/fuzzel" \
+  "$HOME/.config/fuzzel"
+
 # Shell and terminal configuration
 link_path \
   "$DOTFILES_DIR/tmux/.tmux.conf" \
@@ -70,10 +74,20 @@ link_path \
   "$DOTFILES_DIR/tmuxinator" \
   "$HOME/.config/tmuxinator"
 
-# LLM prompts
+# Claude CLAUDE.md file
+link_path \
+  "$DOTFILES_DIR/llm/AGENTS.md" \
+  "$HOME/.claude/CLAUDE.md"
+
+# Codex AGENTS.md file
+link_path \
+  "$DOTFILES_DIR/llm/AGENTS.md" \
+  "$HOME/.codex/AGENTS.md"
+
+# LLM prompts for nvim CodeCompanion
 link_path \
   "$DOTFILES_DIR/llm/prompts" \
-  "$HOME/dev/.prompts"
+  "$HOME/dev/prompts"
 
 # Oh My Zsh custom content
 if [[ -d "$HOME/.oh-my-zsh" ]]; then
