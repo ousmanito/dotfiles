@@ -142,13 +142,10 @@ vim.keymap.set('v', 'S', '<Plug>(nvim-surround-visual)')
 
 -- Colorscheme
 vim.keymap.set('n', '<leader>at', function()
-  local file = io.open(vim.fn.expand '~/.cache/nvim-theme', 'r')
-  if file then
-    local theme = file:read '*l'
-    file:close()
-    if theme and theme ~= '' then
-      vim.cmd('colorscheme ' .. theme)
-      print('Thème synchronisé : ' .. theme)
-    end
+  local theme = _G.get_system_theme()
+  if pcall(vim.cmd.colorscheme, theme) then
+    print('Thème synchronisé : ' .. theme)
+  else
+    print('Erreur : Impossible de charger le thème ' .. theme)
   end
 end, { desc = 'Synchronize theme with system' })

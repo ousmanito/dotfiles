@@ -93,7 +93,7 @@ vim.o.confirm = true
 vim.o.termguicolors = true
 
 -- Colorscheme
-local function get_system_theme()
+function _G.get_system_theme()
   local file = io.open(vim.fn.expand '~/.cache/nvim-theme', 'r')
   if file then
     local theme = file:read '*l'
@@ -102,8 +102,8 @@ local function get_system_theme()
       return theme
     end
   end
-  return 'tokyonight' -- Thème de secours par défaut si le fichier n'existe pas
+  return 'tokyonight' -- Thème de secours
 end
 
--- Assigne le thème au démarrage
-vim.g.colorscheme = get_system_theme()
+-- On définit la variable globale (Lazy l'utilise pour configurer le thème par défaut)
+vim.g.colorscheme = _G.get_system_theme()
